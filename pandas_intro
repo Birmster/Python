@@ -1,0 +1,56 @@
+#Data Manipulation in Pandas Course
+
+#EDA/Describe
+print(dataname.head()) #prints header
+print(dataname.info()) #prints helpful info
+print(dataname.describe()) 
+print(dataname.shape)
+
+#sorting and subsetting
+dataname.sort(values(["weight", "height"], ascending=(True, False)))
+#to sort on 1 col
+  df.sort_values("breed")
+#to short on 2+col
+  df.sort_values(["breed", "weight"])
+
+# Sort homelessness by region, then descending family members
+homelessness_reg_fam = homelessness.sort_values(["region","family_members"],ascending=(True,False))
+# Print the top few rows
+print(homelessness_reg_fam.head())
+
+
+#subsetting
+dogs["height"] > 50
+dogs[dogs["height"] >50]
+dogs[dogs["dob"] < "2015-01-01"]
+dogs[dogs["height_cm"] > 60]
+
+# Filter for rows where family_members is less than 1000 
+# and region is Pacific
+fam_lt_1k_pac = homelessness[(homelessness["family_members"] < 1000) & (homelessness["region"] =="Pacific")]
+
+# See the result
+print(fam_lt_1k_pac)
+
+#multiple conditions with logical operators
+is_lab = dogs["breed"]=="Lab"
+is_brown = dogs["color"]=="Brown"
+dogs[is_lab & is_brown]
+
+#subsetting using isin()
+is_black_or_brown = dogs["color"].isin(["Black","Brown"])
+dogs[is_black_or_brown]
+
+
+#new Column
+  # Add total col as sum of individuals and family_members
+  homelessness["total"]= homelessness["individuals"] + homelessness["family_members"]
+  
+  # Add p_homeless col as proportion of total homeless population to the state population
+  homelessness["p_homeless"] = homelessness["total"] / homelessness["state_pop"]
+  
+  # See the result
+  print(homelessness)
+
+
+
